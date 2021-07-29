@@ -52,17 +52,7 @@ public class TestSunshineDatabase {
      */
     private final Context context = InstrumentationRegistry.getTargetContext();
 
-    /*
-     * In order to verify that you have set up your classes properly and followed our TODOs, we
-     * need to create what's called a Change Detector Test. In almost any other situation, these
-     * tests are discouraged, as they provide no real value in a production setting. However, using
-     * reflection to verify that you have set your classes up correctly will help provide more
-     * useful errors if you've missed a step in our instructions.
-     *
-     * Additionally, using reflection for these tests allows you to run the tests when they
-     * normally wouldn't compile, as they depend on pieces of your classes that you might not
-     * have created when you initially run the tests.
-     */
+   
     private static final String packageName = "com.example.android.sunshine";
     private static final String dataPackageName = packageName + ".data";
 
@@ -189,25 +179,7 @@ public class TestSunshineDatabase {
                 REFLECTED_DATABASE_VERSION);
     }
 
-    /**
-     * Tests to ensure that inserts into your database results in automatically incrementing row
-     * IDs and that row IDs are not reused.
-     * <p>
-     * If the INTEGER PRIMARY KEY column is not explicitly given a value, then it will be filled
-     * automatically with an unused integer, usually one more than the largest _ID currently in
-     * use. This is true regardless of whether or not the AUTOINCREMENT keyword is used.
-     * <p>
-     * If the AUTOINCREMENT keyword appears after INTEGER PRIMARY KEY, that changes the automatic
-     * _ID assignment algorithm to prevent the reuse of _IDs over the lifetime of the database.
-     * In other words, the purpose of AUTOINCREMENT is to prevent the reuse of _IDs from previously
-     * deleted rows.
-     * <p>
-     * To test this, we first insert a row into the database and get its _ID. Then, we'll delete
-     * that row, change the data that we're going to insert, and insert the changed data into the
-     * database again. If AUTOINCREMENT isn't set up properly in the WeatherDbHelper's table
-     * create statement, then the _ID of the first insert will be reused. However, if AUTOINCREMENT
-     * is setup properly, that older ID will NOT be reused, and the test will pass.
-     */
+   
     @Test
     public void testDuplicateDateInsertBehaviorShouldReplace() {
 
@@ -226,10 +198,7 @@ public class TestSunshineDatabase {
                 null,
                 testWeatherValues);
 
-        /*
-         * We don't really care what this ID is, just that it is different than the original and
-         * that we can use it to verify our "new" weather entry has been made.
-         */
+       
         long newWeatherId = originalWeatherId + 1;
 
         testWeatherValues.put(REFLECTED_COLUMN_WEATHER_ID, newWeatherId);
@@ -259,10 +228,7 @@ public class TestSunshineDatabase {
         newWeatherIdCursor.close();
     }
 
-    /**
->>>>>>> a6840f1... S07.03-Exercise-ConflictResolutionPolicy
-     * Tests the columns with null values cannot be inserted into the database.
-     */
+    
     @Test
     public void testNullColumnConstraints() {
         /* Use a WeatherDbHelper to get access to a writable database */
@@ -367,11 +333,7 @@ public class TestSunshineDatabase {
                 firstRowId, secondRowId);
     }
 
-    /**
-     * This method tests the {@link WeatherDbHelper#onUpgrade(SQLiteDatabase, int, int)}. The proper
-     * behavior for this method in our case is to simply DROP (or delete) the weather table from
-     * the database and then have the table recreated.
-     */
+    
     @Test
     public void testOnUpgradeBehavesCorrectly() {
 
@@ -379,10 +341,7 @@ public class TestSunshineDatabase {
 
         dbHelper.onUpgrade(database, 13, 14);
 
-        /*
-         * This Cursor will contain the names of each table in our database and we will use it to
-         * make sure that our weather table is still in the database after upgrading.
-         */
+       
         Cursor tableNameCursor = database.rawQuery(
                 "SELECT name FROM sqlite_master WHERE type='table' AND name='" + REFLECTED_TABLE_NAME + "'",
                 null);
@@ -422,15 +381,7 @@ public class TestSunshineDatabase {
         database.close();
     }
 
-    /**
-     * This method tests that our database contains all of the tables that we think it should
-     * contain. Although in our case, we just have one table that we expect should be added
-     * <p>
-     * {@link com.example.android.sunshine.data.WeatherContract.WeatherEntry#TABLE_NAME}.
-     * <p>
-     * Despite only needing to check one table name in Sunshine, we set this method up so that
-     * you can use it in other apps to test databases with more than one table.
-     */
+   
     @Test
     public void testCreateDb() {
         /*
