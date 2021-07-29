@@ -1,18 +1,4 @@
-/*
- * Copyright (C) 2016 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+
 package com.example.android.sunshine.data;
 
 import android.content.ContentValues;
@@ -45,13 +31,7 @@ import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
 
-/**
- * These are functions and some test data to make it easier to test your database and Content
- * Provider.
- * <p>
- * NOTE: If your WeatherContract class doesn't exactly match ours, THIS WILL NOT WORK as we've
- * provided and you will need to make changes to this code to use it to pass your tests.
- */
+
 class TestUtilities {
 
     /* October 1st, 2016 at midnight, GMT time */
@@ -59,14 +39,7 @@ class TestUtilities {
 
     static final int BULK_INSERT_RECORDS_TO_INSERT = 10;
 
-    /**
-     * Ensures there is a non empty cursor and validates the cursor's data by checking it against
-     * a set of expected values. This method will then close the cursor.
-     *
-     * @param error          Message when an error occurs
-     * @param valueCursor    The Cursor containing the actual values received from an arbitrary query
-     * @param expectedValues The values we expect to receive in valueCursor
-     */
+    
     static void validateThenCloseCursor(String error, Cursor valueCursor, ContentValues expectedValues) {
         assertNotNull(
                 "This cursor is null. Did you make sure to register your ContentProvider in the manifest?",
@@ -77,14 +50,7 @@ class TestUtilities {
         valueCursor.close();
     }
 
-    /**
-     * This method iterates through a set of expected values and makes various assertions that
-     * will pass if our app is functioning properly.
-     *
-     * @param error          Message when an error occurs
-     * @param valueCursor    The Cursor containing the actual values received from an arbitrary query
-     * @param expectedValues The values we expect to receive in valueCursor
-     */
+
     static void validateCurrentRecord(String error, Cursor valueCursor, ContentValues expectedValues) {
         Set<Map.Entry<String, Object>> valueSet = expectedValues.valueSet();
 
@@ -132,18 +98,7 @@ class TestUtilities {
         return testWeatherValues;
     }
 
-    /**
-     * Used as a convenience method to return a singleton instance of an array of ContentValues to
-     * populate our database or insert using our ContentProvider's bulk insert method.
-     * <p>
-     * It is handy to have utility methods that produce test values because it makes it easy to
-     * compare results from ContentProviders and databases to the values you expect to receive.
-     * See {@link #validateCurrentRecord(String, Cursor, ContentValues)} and
-     * {@link #validateThenCloseCursor(String, Cursor, ContentValues)} for more information on how
-     * this verification is performed.
-     *
-     * @return Array of ContentValues that can be inserted into our ContentProvider or weather.db
-     */
+   
     static ContentValues[] createBulkInsertTestWeatherValues() {
 
         ContentValues[] bulkTestWeatherValues = new ContentValues[BULK_INSERT_RECORDS_TO_INSERT];
@@ -177,14 +132,7 @@ class TestUtilities {
         return TestContentObserver.getTestContentObserver();
     }
 
-    /**
-     * Students: The functions we provide inside of TestWeatherProvider use TestContentObserver to test
-     * the ContentObserver callbacks using the PollingCheck class from the Android Compatibility
-     * Test Suite tests.
-     * <p>
-     * NOTE: This only tests that the onChange function is called; it DOES NOT test that the
-     * correct Uri is returned.
-     */
+   
     static class TestContentObserver extends ContentObserver {
         final HandlerThread mHT;
         boolean mContentChanged;
@@ -200,15 +148,7 @@ class TestUtilities {
             return new TestContentObserver(ht);
         }
 
-        /**
-         * Called when a content change occurs.
-         * <p>
-         * To ensure correct operation on older versions of the framework that did not provide a
-         * Uri argument, applications should also implement this method whenever they implement
-         * the {@link #onChange(boolean, Uri)} overload.
-         *
-         * @param selfChange True if this is a self-change notification.
-         */
+       
         @Override
         public void onChange(boolean selfChange) {
             onChange(selfChange, null);
@@ -225,12 +165,7 @@ class TestUtilities {
             mContentChanged = true;
         }
 
-        /**
-         * Note: The PollingCheck class is taken from the Android CTS (Compatibility Test Suite).
-         * It's useful to look at the Android CTS source for ideas on how to test your Android
-         * applications. The reason that PollingCheck works is that, by default, the JUnit testing
-         * framework is not running on the main Android application thread.
-         */
+       
         void waitForNotificationOrFail() {
 
             new PollingCheck(5000) {
