@@ -1,18 +1,5 @@
-/*
- * Copyright (C) 2016 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+
+
 package com.example.android.sunshine.data;
 
 import android.content.Context;
@@ -27,16 +14,7 @@ public final class SunshinePreferences {
     public static final String PREF_COORD_LAT = "coord_lat";
     public static final String PREF_COORD_LONG = "coord_long";
 
-    /**
-     * Helper method to handle setting location details in Preferences (city name, latitude,
-     * longitude)
-     * <p>
-     * When the location details are updated, the database should to be cleared.
-     *
-     * @param context  Context used to get the SharedPreferences
-     * @param lat      the latitude of the city
-     * @param lon      the longitude of the city
-     */
+
     public static void setLocationDetails(Context context, double lat, double lon) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = sp.edit();
@@ -46,11 +24,7 @@ public final class SunshinePreferences {
         editor.apply();
     }
 
-    /**
-     * Resets the location coordinates stores in SharedPreferences.
-     *
-     * @param context Context used to get the SharedPreferences
-     */
+
     public static void resetLocationCoordinates(Context context) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = sp.edit();
@@ -60,15 +34,7 @@ public final class SunshinePreferences {
         editor.apply();
     }
 
-    /**
-     * Returns the location currently set in Preferences. The default location this method
-     * will return is "94043,USA", which is Mountain View, California. Mountain View is the
-     * home of the headquarters of the Googleplex!
-     *
-     * @param context Context used to access SharedPreferences
-     * @return Location The current user has set in SharedPreferences. Will default to
-     * "94043,USA" if SharedPreferences have not been implemented yet.
-     */
+
     public static String getPreferredWeatherLocation(Context context) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
 
@@ -143,13 +109,7 @@ public final class SunshinePreferences {
         return spContainBothLatitudeAndLongitude;
     }
 
-    /**
-     * Returns true if the user prefers to see notifications from Sunshine, false otherwise. This
-     * preference can be changed by the user within the SettingsFragment.
-     *
-     * @param context Used to access SharedPreferences
-     * @return true if the user prefers to see notifications, false otherwise
-     */
+    
     public static boolean areNotificationsEnabled(Context context) {
         /* Key for accessing the preference for showing notifications */
         String displayNotificationsKey = context.getString(R.string.pref_enable_notifications_key);
