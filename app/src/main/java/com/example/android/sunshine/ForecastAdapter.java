@@ -1,18 +1,4 @@
-/*
- * Copyright (C) 2016 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+
 package com.example.android.sunshine;
 
 import android.content.Context;
@@ -79,19 +65,17 @@ class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastAdapt
 
         switch (viewType) {
 
-//          COMPLETED (12) If the view type of the layout is today, use today layout
             case VIEW_TYPE_TODAY: {
                 layoutId = R.layout.list_item_forecast_today;
                 break;
             }
 
-//          COMPLETED (13) If the view type of the layout is future day, use future day layout
             case VIEW_TYPE_FUTURE_DAY: {
                 layoutId = R.layout.forecast_list_item;
                 break;
             }
 
-//          COMPLETED (14) Otherwise, throw an IllegalArgumentException
+
             default:
                 throw new IllegalArgumentException("Invalid view type, value of " + viewType);
         }
@@ -116,19 +100,19 @@ class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastAdapt
         int viewType = getItemViewType(position);
 
         switch (viewType) {
-//          COMPLETED (15) If the view type of the layout is today, display a large icon
+
             case VIEW_TYPE_TODAY:
                 weatherImageId = SunshineWeatherUtils
                         .getLargeArtResourceIdForWeatherCondition(weatherId);
                 break;
 
-//          COMPLETED (16) If the view type of the layout is today, display a small icon
+
             case VIEW_TYPE_FUTURE_DAY:
                 weatherImageId = SunshineWeatherUtils
                         .getSmallArtResourceIdForWeatherCondition(weatherId);
                 break;
 
-//          COMPLETED (17) Otherwise, throw an IllegalArgumentException
+
             default:
                 throw new IllegalArgumentException("Invalid view type, value of " + viewType);
         }
@@ -206,7 +190,6 @@ class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastAdapt
     }
 
 
-//  COMPLETED (9) Override getItemViewType
     @Override
     public int getItemViewType(int position) {
 //      COMPLETED (10) Within getItemViewtype, if mUseTodayLayout is true and position is 0, return the ID for today viewType
